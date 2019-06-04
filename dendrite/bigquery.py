@@ -1,6 +1,6 @@
 from google.cloud import bigquery
 
-from base import Model, Row
+from dendrite.base import Model, Row
 
 
 class BigQueryModel(Model):
