@@ -1,29 +1,22 @@
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc
-from sklearn.model_selection import train_test_split
+
+from ..converters import TrainTestSplit
 
 
 class ROCCurve(object):
-    def __init__(self, X=None, y=None):
-        self.X = X
-        self.y = y
-        self.n_classes = 0 if not y else len(y[0])
+    """ This only works for a single class classification currently """
+    def calc(self, parent, test_size=0.25, **kwargs):
+        X = parent.dataset
+        y = parent.target
+        X_train, X_test, y_train, y_test = TrainTestSplit(X, y, test_size=test_size).split()
 
-    def __call__(self, X, y):
-        self.n_classes = len(y[0])
-        self.X = X
-        self.y = y
-
-    def calc(self, parent, test_size=0.7, **kwargs):
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size)
-
-        y_score = parent.classifier.fit(X_train, y_train).decision_function(X_test)
+        y_score = parent.predictor.fit(X_train, y_train).decision_function(X_test)
         fpr = dict()
         tpr = dict()
         roc_auc = dict()
-        for i in range(self.n_classes):
-            fpr[i], tpr[i], _ = roc_curve(y_test[:, i], y_score[:, i])
-            roc_auc[i] = auc(fpr[i], tpr[i])
+        fpr[0], tpr[0], _ = roc_curve(y_test.nd_array[:, 0], y_score)
+        roc_auc[0] = auc(fpr[0], tpr[0])
         self.fpr = fpr
         self.tpr = tpr
         self.roc_auc = roc_auc

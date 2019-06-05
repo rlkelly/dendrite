@@ -6,6 +6,7 @@ from .feature import Feature
 from .predictor import Predictor
 from .row import Row
 from .row_select import RowSelect
+from .target import Target
 
 
 def flatten(x):
@@ -86,6 +87,7 @@ class DataModel:
         self.predictor = predictor
 
     def fit(self, target):
+        self.target = target
         return self.predictor.fit(self.dataset, target)
 
     def predict(self, dataset):
@@ -96,6 +98,9 @@ class DataModel:
 
     def print_model(self):
         self.predictor.print_model()
+
+    def plot(self, plotter):
+        plotter().plot(self)
 
     def __getattr__(self, name):
         # TODO: this is just a demonstration of an idea

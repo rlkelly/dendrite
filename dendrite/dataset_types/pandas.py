@@ -6,8 +6,9 @@ from ..base import DataModel, Row, Dataset
 
 
 class PandasDataset(Dataset):
-    def __init__(self, dataset, header):
-        self.dataset = pd.DataFrame(dataset, columns=header)
+    def __init__(self, dataset, header=None):
+        super(PandasDataset, self).__init__(self, dataset, header)
+        self.dataset = pd.DataFrame(self.dataset, columns=self.header)
 
     @property
     def columns(self):

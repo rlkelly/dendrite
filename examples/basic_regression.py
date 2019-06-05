@@ -1,7 +1,7 @@
 from context import dendrite
 
 from dendrite import Feature, DataModel, Dataset, Row, Target
-from dendrite.predictors.linear_regressor import LinearRegressor
+from dendrite.predictors import LinearRegressor
 
 if __name__ == '__main__':
     # x1 * 3 + x2 * 2 + 5

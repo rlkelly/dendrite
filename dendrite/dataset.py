@@ -41,5 +41,8 @@ class Dataset(object):
             print(row)
         print()
 
+    def to_array(self):
+        return [r.values for r in self.dataset]
+
     def to_pandas(self):
         return PandasDataset(self.dataset, columns=self.header)

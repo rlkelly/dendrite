@@ -1,4 +1,4 @@
-from .. import Feature
+from .. import Dataset, Feature
 
 
 class OneHotEncoder(Feature):
@@ -21,6 +21,10 @@ class OneHotEncoder(Feature):
 
     def get_name(self):
         return [f'{self.name}_{value}' for value in self.values]
+
+    def make_dataset(self, dataset):
+        # TODO: kludge
+        return Dataset([self.transform(row) for row in dataset])
 
     def transform(self, row):
         output = [0] * len(self.values)
