@@ -37,5 +37,6 @@ class ROCCurve(object):
             plt.legend(loc="lower right")
             plt.show()
 
+
 if __name__ == '__main__':
     ROCCurve(X, y).plot()

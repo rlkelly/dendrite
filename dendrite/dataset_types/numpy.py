@@ -16,6 +16,7 @@ class NumpyDataset(Dataset):
     def __getitem__(self, *key, **kwargs):
         return self.nd_array.__getitem__(*key, **kwargs)
 
+
 class NumpyTarget(Target):
     def __init__(self, dataset, header=None):
         super(NumpyTarget, self).__init__(dataset, header)

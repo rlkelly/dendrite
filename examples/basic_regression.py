@@ -3,6 +3,7 @@ from context import dendrite
 from dendrite import Feature, DataModel, Dataset, Row, Target
 from dendrite.predictors import LinearRegressor
 
+
 if __name__ == '__main__':
     # x1 * 3 + x2 * 2 + 5
     dataset = Dataset([[2, 3], [5, 2], [1, 1]])

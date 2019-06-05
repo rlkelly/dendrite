@@ -25,7 +25,6 @@ class ViolationCode(OneHotEncoder):
     column = 'Violation_Code'
 
 
-
 if __name__ == '__main__':
     b = BigQueryDataset(
         'chrome-sensor-238716',
