@@ -1,7 +1,7 @@
 from .. import Dataset, Feature
-from .uniques import Uniques
 
-class OneHotEncoder(Uniques):
+
+class LabelEncoder(Feature):
     description = "creates_one_hot_encoding"
     column = 0 # Must set on creation
     MAX_FEATURES = 25
@@ -18,6 +18,4 @@ class OneHotEncoder(Uniques):
         return [f'{self.name}_{value}' for value in self.values]
 
     def transform(self, row):
-        output = [0] * len(self.values)
-        output[self.values.index(row[self.column])] = 1
-        return output
+        return self.values.index(row)

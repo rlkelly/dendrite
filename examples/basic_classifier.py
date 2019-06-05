@@ -13,6 +13,6 @@ if __name__ == '__main__':
     model = DataModel(dataset)
     model.add_predictor(LogisticRegressor())
     target = Target([[random() > 0.5] for _ in range(100)])
-    # target = OneHotEncoder(target).make_dataset(target)
+    t2 = OneHotEncoder(target)()
     model.fit(target)
     model.plot(ROCCurve)

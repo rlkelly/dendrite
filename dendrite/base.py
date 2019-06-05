@@ -27,7 +27,7 @@ class DataModel:
         return self.dataset.header
 
     def get_new_header(self):
-        return [feature.get_name() for feature in self.features]
+        return [feature.columns() for feature in self.features]
 
     def update_dataset(self, dataset, header):
         self.header = header

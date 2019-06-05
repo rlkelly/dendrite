@@ -7,6 +7,7 @@ class Row(object):
 
     def __repr__(self):
         return f'Row ({self.values})'
+
     def __getitem__(self, item):
         if type(item) == int:
             ix = item

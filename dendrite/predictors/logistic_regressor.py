@@ -16,8 +16,8 @@ class LogisticRegressor(Predictor):
         self.lr.fit(ds, t)
         return self
 
-    def predict(self, rows):
-        self.prediction = Dataset(self.lr.predict([r.values for r in rows]))
+    def predict(self, dataset):
+        self.prediction = Dataset(self.lr.predict(dataset.to_array()))
         return self.prediction
 
     def score(self, input, output):
