@@ -3,11 +3,11 @@ from google.cloud import bigquery
 from ..base import DataModel, Row, Dataset
 
 
-class BigQueryModel(DataModel):
+class BigQueryDataset(DataModel):
     """This requires your environment variable GOOGLE_APPLICATION_CREDENTIALS to be set"""
 
     def __init__(self, project_id, query):
-        super(BigQueryModel, self).__init__()
+        super(BigQueryDataset, self).__init__()
         self.client = bigquery.Client(project_id)
         self.update_query(query)
         self.update_dataset()

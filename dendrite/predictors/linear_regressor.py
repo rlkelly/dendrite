@@ -8,6 +8,7 @@ class LinearRegressor(Predictor):
     """For regression with a single dimensional target variable"""
     def __init__(self, *args, **kwargs):
         self.lr = LinearRegression(*args, **kwargs)
+        self.prediction = None
 
     def fit(self, dataset, target):
         ds = [d.values for d in dataset.dataset]
@@ -15,10 +16,11 @@ class LinearRegressor(Predictor):
         self.lr.fit(ds, t)
 
     def predict(self, rows):
-        return Dataset(self.lr.predict([r.values for r in rows]))
+        self.prediction = Dataset(self.lr.predict([r.values for r in rows]))
+        return self.prediction
 
-    def score(self):
-        raise NotImplementedException()
+    def score(self, input, output):
+        return self.lr.score(input, output)
 
     def print_model(self):
         print(' + '.join([

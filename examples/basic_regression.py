@@ -13,6 +13,8 @@ if __name__ == '__main__':
 
     model.add_predictor(LinearRegressor())
     model.fit(target)
-    test = Dataset([[8, 3], [2, 5]])
-    model.predict(test).print_rows()
+    test_data = Dataset([[8, 3], [2, 5]])
+    test_result = Dataset([[35], [21]])
+    model.predict(test_data).print_rows()
+    print(model.score(test_data, test_result))
     model.print_model()

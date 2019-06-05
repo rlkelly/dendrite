@@ -91,6 +91,9 @@ class DataModel:
     def predict(self, dataset):
         return self.predictor.predict(dataset)
 
+    def score(self, dataset, target):
+        return self.predictor.score(dataset, target)
+
     def print_model(self):
         self.predictor.print_model()
 

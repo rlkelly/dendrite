@@ -1,7 +1,7 @@
 from context import dendrite
 
 from dendrite import Feature
-from dendrite.bigquery import BigQueryModel
+from dendrite.bigquery import BigQueryDataset
 from dendrite.converters.one_hot import OneHotEncoder
 
 
@@ -27,7 +27,7 @@ class ViolationCode(OneHotEncoder):
 
 
 if __name__ == '__main__':
-    b = BigQueryModel(
+    b = BigQueryDataset(
         'chrome-sensor-238716',
         'SELECT * FROM `OSINT.water_data` ORDER BY RAND() LIMIT 10',
     )
