@@ -5,7 +5,7 @@ from ..dataset import Dataset
 
 
 class LogisticRegressor(Predictor):
-    """For regression with a single dimensional target variable"""
+    """For single or multi-class Logistic Regression"""
     def __init__(self, *args, **kwargs):
         self.lr = LogisticRegressor(*args, **kwargs)
         self.prediction = None
