@@ -1,7 +1,6 @@
 from context import dendrite
 
 from dendrite import Feature, DataModel, Row
-from dendrite.bigquery import BigQueryDataset
 
 
 class TimesTwoFeature(Feature):

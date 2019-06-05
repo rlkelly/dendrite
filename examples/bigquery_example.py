@@ -1,7 +1,7 @@
 from context import dendrite
 
 from dendrite import Feature
-from dendrite.bigquery import BigQueryDataset
+from dendrite.dataset_types import BigQueryDataset
 from dendrite.converters.one_hot import OneHotEncoder
 
 
