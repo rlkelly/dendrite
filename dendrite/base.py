@@ -91,7 +91,11 @@ class DataModel:
     def predict(self, dataset):
         return self.predictor.predict(dataset)
 
+    def print_model(self):
+        self.predictor.print_model()
+
     def __getattr__(self, name):
+        # TODO: this is just a demonstration of an idea
         def method(*args, **kwargs):
             m = getattr(self.dataset, name)
             return m(*args, **kwargs)

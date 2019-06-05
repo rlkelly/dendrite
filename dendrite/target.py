@@ -1,5 +1,5 @@
 from .dataset import Dataset
 
 
-def Target(Dataset):
+class Target(Dataset):
     pass

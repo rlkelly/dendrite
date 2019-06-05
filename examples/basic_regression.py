@@ -5,15 +5,14 @@ from dendrite.predictors.linear_regressor import LinearRegressor
 
 if __name__ == '__main__':
     # x1 * 3 + x2 * 2 + 5
-    dataset = Dataset([Row([2, 3]), Row([5, 2]), Row([1, 1])])
-    target = Dataset([Row([17]), Row([24]), Row([10])])
+    dataset = Dataset([[2, 3], [5, 2], [1, 1]])
+    target = Target([[17], [24], [10]])
     d = Dataset(dataset)
     model = DataModel(d)
     model.print_rows()
-    lr = LinearRegressor()
 
-    model.add_predictor(lr)
+    model.add_predictor(LinearRegressor())
     model.fit(target)
-
-    test = Dataset([Row([8, 3]), Row([2, 5])])
+    test = Dataset([[8, 3], [2, 5]])
     model.predict(test).print_rows()
+    model.print_model()

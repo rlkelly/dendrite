@@ -5,6 +5,7 @@ from ..dataset import Dataset
 
 
 class LinearRegressor(Predictor):
+    """For regression with a single dimensional target variable"""
     def __init__(self, *args, **kwargs):
         self.lr = LinearRegression(*args, **kwargs)
 
@@ -18,3 +19,8 @@ class LinearRegressor(Predictor):
 
     def score(self):
         raise NotImplementedException()
+
+    def print_model(self):
+        print(' + '.join([
+            f'x{i} * {b}' for i, b in enumerate(self.lr.coef_[0])
+        ]) + f' + {self.lr.intercept_[0]}')

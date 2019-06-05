@@ -1,9 +1,13 @@
+from .row import Row
 from .row_select import RowSelect
 
 
 class Dataset(object):
     def __init__(self, dataset, header=None):
-        self.dataset = dataset
+        d = []
+        for row in dataset:
+            d.append(Row(row))
+        self.dataset = d
         if header:
             self.header = header
         else:
