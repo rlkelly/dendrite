@@ -1,7 +1,4 @@
-import os
-import sys
-
-sys.path.append(os.curdir)
+from context import dendrite
 
 from dendrite.base import Feature
 from dendrite.bigquery import BigQueryModel
