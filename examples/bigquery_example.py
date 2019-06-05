@@ -1,18 +1,22 @@
 from context import dendrite
 
-from dendrite.base import Feature
+from dendrite import Feature
 from dendrite.bigquery import BigQueryModel
 
 
 class IsMajorViolation(Feature):
+    description = "check for a major violation"
+
     @staticmethod
-    def generate(row):
+    def transform(row):
         return row['Is_Major_Violation'] != '-'
 
 
 class IsNitrateViolation(Feature):
+    description = "checks for a nitrate violation"
+
     @staticmethod
-    def generate(row):
+    def transform(row):
         return row['Contaminant_Name'] == 'Nitrate'
 
 

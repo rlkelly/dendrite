@@ -1,27 +1,31 @@
-from dendrite.base import Feature, Model
+from context import dendrite
+
+from dendrite import Feature, Model, Row
 from dendrite.bigquery import BigQueryModel
 
 
 class TimesTwoFeature(Feature):
+    description = "multiplies by two"
+
     @staticmethod
-    def generate(row):
-        return row[0] * 2
+    def transform(row):
+        return row['value'] * 2
 
 class TimesThreeFeature(Feature):
+    description = "multiplies by three"
+
     @staticmethod
-    def generate(row):
-        return row[0] * 3
+    def transform(row):
+        return row['value'] * 3
 
 
 if __name__ == '__main__':
-    TimesTwoFeature
-    TimesThreeFeature
     model = Model()
     model.add_feature(TimesTwoFeature)
     model.add_feature(TimesThreeFeature)
-    print(model.map_row([2]))
+    print(model.map_row(Row([2], ['value'])))
 
-    dataset = [[2], [3]]
-    print(model.map_rows(dataset))
+    dataset = [Row([2], ['value']), Row([3], ['value'])]
+    print(model.map_rows(Dataset(dataset)))
     model.update_dataset(dataset, header=['value'])
     print(model.map_dataset())
