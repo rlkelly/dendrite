@@ -21,9 +21,16 @@ class Dataset(object):
         self.ix += 1
         return RowSelect(res, self.header)
 
+    def print_rows(self):
+        for row in self.dataset:
+            print(row)
+
     def __repr__(self):
         string_header = ', '.join(self.header)
         return f'Dataset({string_header})'
+
+    def __getitem__(self, index):
+        return self.dataset[index]
 
 
 def Target(Dataset):

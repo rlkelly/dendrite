@@ -2,6 +2,7 @@ from context import dendrite
 
 from dendrite import Feature
 from dendrite.bigquery import BigQueryModel
+from dendrite.converters.one_hot import OneHotEncoder
 
 
 class IsMajorViolation(Feature):
@@ -13,18 +14,24 @@ class IsMajorViolation(Feature):
 
 
 class IsNitrateViolation(Feature):
-    name = 'is_nitrate_violation'
     description = "checks for a nitrate violation"
 
     @staticmethod
     def transform(row):
         return row['Contaminant_Name'] == 'Nitrate'
 
+class ViolationCode(OneHotEncoder):
+    description = "one hot encoding of violation code"
+    column = 'Violation_Code'
+
+
 
 if __name__ == '__main__':
     b = BigQueryModel(
         'chrome-sensor-238716',
-        'SELECT * FROM `OSINT.water_data` LIMIT 10',
+        'SELECT * FROM `OSINT.water_data` ORDER BY RAND() LIMIT 10',
     )
-    b.add_features(IsMajorViolation, IsNitrateViolation)
-    print(b.map_dataset())
+    b.add_features(IsMajorViolation, IsNitrateViolation, ViolationCode)
+    b.map_dataset(inplace=True)
+    b.flatten(inplace=True)
+    b.print_rows()
