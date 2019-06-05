@@ -1,6 +1,6 @@
 from context import dendrite
 
-from dendrite import Feature, Model, Row
+from dendrite import Feature, DataModel, Row
 from dendrite.bigquery import BigQueryModel
 
 
@@ -20,7 +20,7 @@ class TimesThreeFeature(Feature):
 
 
 if __name__ == '__main__':
-    model = Model()
+    model = DataModel()
     model.add_feature(TimesTwoFeature)
     model.add_feature(TimesThreeFeature)
     print(model.map_row(Row([2], ['value'])))

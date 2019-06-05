@@ -2,10 +2,10 @@ from .row_select import RowSelect
 
 
 class Dataset(object):
-    def __init__(self, dataset, primary_key, header):
+    def __init__(self, dataset, header, primary_key=None):
         self.dataset = dataset
-        self.primary_key = primary_key
         self.header = header
+        self.primary_key = primary_key
 
     def __len__(self):
         return len(self.dataset)
@@ -20,3 +20,11 @@ class Dataset(object):
         res = self.dataset[self.ix]
         self.ix += 1
         return RowSelect(res, self.header)
+
+    def __repr__(self):
+        string_header = ', '.join(self.header)
+        return f'Dataset({string_header})'
+
+
+def Target(Dataset):
+    pass

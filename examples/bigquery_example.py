@@ -13,6 +13,7 @@ class IsMajorViolation(Feature):
 
 
 class IsNitrateViolation(Feature):
+    name = 'is_nitrate_violation'
     description = "checks for a nitrate violation"
 
     @staticmethod
@@ -25,6 +26,5 @@ if __name__ == '__main__':
         'chrome-sensor-238716',
         'SELECT * FROM `OSINT.water_data` LIMIT 10',
     )
-    b.add_feature(IsMajorViolation)
-    b.add_feature(IsNitrateViolation)
+    b.add_features(IsMajorViolation, IsNitrateViolation)
     print(b.map_dataset())

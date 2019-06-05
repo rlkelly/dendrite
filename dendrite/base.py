@@ -7,7 +7,7 @@ from .row import Row
 from .row_select import RowSelect
 
 
-class Model(metaclass=ABCMeta):
+class DataModel(metaclass=ABCMeta):
     def __init__(self, dataset=None, index=None):
         self.dataset = dataset
         self.features = []
@@ -17,6 +17,9 @@ class Model(metaclass=ABCMeta):
     def header(self):
         return self.dataset.header
 
+    def get_new_header(self):
+        return [feature.name for feature in self.features]
+
     def update_dataset(self, dataset, header):
         self.header = header
         self.dataset = []
@@ -24,6 +27,9 @@ class Model(metaclass=ABCMeta):
             assert len(dataset[i]) == len(dataset[i - 1])
             self.dataset.append(Row(dataset[i]))
         assert len(self.header) == len(self.dataset[0])
+
+    def add_features(self, *features):
+        return self.add_feature(*features)
 
     def add_feature(self, *features):
         for feature in features:
@@ -43,7 +49,7 @@ class Model(metaclass=ABCMeta):
         return output
 
     def map_dataset(self):
-        return self.map_rows(self.dataset)
+        return Dataset(self.map_rows(self.dataset), self.get_new_header())
 
     def __getitem__(self, index: int):
         return RowSelect(self.dataset[index], self.header)
