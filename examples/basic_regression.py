@@ -5,8 +5,8 @@ from dendrite.predictors.linear_regressor import LinearRegressor
 
 if __name__ == '__main__':
     # x1 * 3 + x2 * 2 + 5
-    dataset = Dataset([Row([2, 3]), Row([5, 2])])
-    target = Dataset([Row([17]), Row([24])])
+    dataset = Dataset([Row([2, 3]), Row([5, 2]), Row([1, 1])])
+    target = Dataset([Row([17]), Row([24]), Row([10])])
     d = Dataset(dataset)
     model = DataModel(d)
     model.print_rows()
@@ -16,4 +16,4 @@ if __name__ == '__main__':
     model.fit(target)
 
     test = Dataset([Row([8, 3]), Row([2, 5])])
-    print(model.predict(test))
+    model.predict(test).print_rows()

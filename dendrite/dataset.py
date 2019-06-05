@@ -24,15 +24,18 @@ class Dataset(object):
         return RowSelect(res, self.header)
 
     def __repr__(self):
-        string_header = ', '.join(self.header)
-        return f'Dataset({string_header})'
+        return f'Dataset(cols: {self.header})'
 
     def __getitem__(self, index):
         return self.dataset[index]
 
     def print_rows(self):
+        header = ', '.join(self.header)
+        print(header)
+        print('-' * len(header))
         for row in self.dataset:
             print(row)
+        print()
 
     def to_pandas(self):
         return PandasDataset(self.dataset, columns=self.header)

@@ -68,11 +68,11 @@ class DataModel:
     def __getitem__(self, index: int):
         return RowSelect(self.dataset[index], self.header)
 
-    def print_rows(self):
-        header = ', '.join(self.header)
-        print(header)
-        print('-' * len(header))
-        self.dataset.print_rows()
+    # def print_rows(self):
+    #     header = ', '.join(self.header)
+    #     print(header)
+    #     print('-' * len(header))
+    #     self.dataset.print_rows()
 
     def flatten(self, inplace=False):
         output = []
@@ -90,3 +90,9 @@ class DataModel:
 
     def predict(self, dataset):
         return self.predictor.predict(dataset)
+
+    def __getattr__(self, name):
+        def method(*args, **kwargs):
+            m = getattr(self.dataset, name)
+            return m(*args, **kwargs)
+        return method

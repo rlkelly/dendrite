@@ -1,6 +1,7 @@
 from sklearn.linear_model import LinearRegression
 
 from ..predictor import Predictor
+from ..dataset import Dataset
 
 
 class LinearRegressor(Predictor):
@@ -13,7 +14,7 @@ class LinearRegressor(Predictor):
         self.lr.fit(ds, t)
 
     def predict(self, rows):
-        return self.lr.predict([r.values for r in rows])
+        return Dataset(self.lr.predict([r.values for r in rows]))
 
     def score(self):
         raise NotImplementedException()
