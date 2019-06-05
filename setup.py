@@ -8,7 +8,7 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name='sample',
+    name='dendrite',
     version='0.1.0',
     description='Package for managing dataset features',
     long_description=readme,
