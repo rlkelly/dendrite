@@ -1,6 +1,6 @@
 from google.cloud import bigquery
 
-from .base import DataModel, Row, Dataset
+from ..base import DataModel, Row, Dataset
 
 
 class BigQueryModel(DataModel):

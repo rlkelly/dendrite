@@ -1,13 +1,13 @@
-import pandas as pd
-
 from .row_select import RowSelect
 
 
 class Dataset(object):
-    def __init__(self, dataset, header, primary_key=None):
+    def __init__(self, dataset, header=None):
         self.dataset = dataset
-        self.header = header
-        self.primary_key = primary_key
+        if header:
+            self.header = header
+        else:
+            self.header = [str(i) for i in range(len(self.dataset[0]))]
 
     def __len__(self):
         return len(self.dataset)
@@ -36,28 +36,3 @@ class Dataset(object):
 
     def to_pandas(self):
         return PandasDataset(self.dataset, columns=self.header)
-
-
-class PandasDataset(Dataset):
-    def __init__(self, dataset, header):
-        self.dataset = pd.DataFrame(dataset, columns=header)
-
-    @property
-    def columns(self):
-        return list(self.dataset.columns)
-
-    @property
-    def columns(self):
-        return self.dataset.index.name
-
-    def join(self, other: PandasDataset, left_index, right_index, how='inner', inplace=False):
-        left = self.dataset.set_index(left_index)
-        right = self.dataset.set_index(right_index)
-        d = left.join(right, how=how)
-        if inplace:
-            self.dataset = d
-        return d
-
-
-def Target(Dataset):
-    pass

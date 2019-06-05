@@ -1,8 +1,9 @@
 import collections
-from typing import List
+from typing import List, Type
 
 from .dataset import Dataset
 from .feature import Feature
+from .predictor import Predictor
 from .row import Row
 from .row_select import RowSelect
 
@@ -15,10 +16,10 @@ def flatten(x):
 
 
 class DataModel:
-    def __init__(self, dataset=None, index=None):
+    def __init__(self, dataset=None):
         self.dataset = dataset
         self.features = []
-        self.index = index
+        # TODO: do I need an index?
 
     @property
     def header(self):
@@ -80,3 +81,12 @@ class DataModel:
         if inplace:
             self.dataset = Dataset(output, flatten(self.header))
         return output
+
+    def add_predictor(self, predictor: Type[Predictor]):
+        self.predictor = predictor
+
+    def fit(self, target):
+        return self.predictor.fit(self.dataset, target)
+
+    def predict(self, dataset):
+        return self.predictor.predict(dataset)
